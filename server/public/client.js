@@ -36,7 +36,10 @@ $(document).ready(function() {
       success: function(response){
         console.log(response);
         getFishData();
-      }
+      },
+      error: function(response) {
+      $('#firstFishy').text('error, you missed a name!');
+    }
     });
   });
 });

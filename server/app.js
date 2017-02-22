@@ -12,12 +12,12 @@ app.use(bodyParser.urlencoded({extended: true})); // this creates req.body
 var fishiesList = [{name:'walleye'}, {name: 'pike'}, {name: 'muskie'}];
 
 app.get('/fish', function(req, res) {  // node has already created this req and res object
-    // res.send is necessary to always give a response from the server.
+  // res.send is necessary to always give a response from the server.
   res.send(fishiesList);
 });
 
 app.get('/fish/first', function(req, res) {  // node has already created this req and res object
-    // res.send is necessary to always give a response from the server.
+  // res.send is necessary to always give a response from the server.
   res.send(fishiesList[0]);
 });
 
@@ -50,8 +50,12 @@ app.get('/fish/first/name', function(req, res) { // every http request needs req
 
 app.post('/fish/new', function(req, res){  // this is the syntax for app.post
   var newFish = req.body;  //data() on the client side become req.body here.
-  fishiesList.push(newFish);
-  res.sendStatus(200);  // success message
+  if (newFish.name == '') {
+    res.sendStatus(404);
+  } else {
+    fishiesList.push(newFish);
+    res.sendStatus(200);  // success message
+  }
 });
 
 
